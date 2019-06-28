@@ -1,0 +1,12 @@
+<h1>Rejoignez-nous sans plus attendre</h1>
+
+
+{% if error == True %}
+<p>Utilisateur ou mot de passe incorrect</p>
+{% endif %}
+
+<form role="form" method="post" action="{% url 'register' %}">
+    {{ form }}
+    {% csrf_token %}
+     <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
+</form>

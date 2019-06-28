@@ -1,0 +1,24 @@
+<h1>Bet4Win</h1>
+
+
+<h3>Devenez le meilleur pronostiqueur</h3>
+
+{% if error == True %}
+<p>Utilisateur ou mot de passe incorrect</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+bonjour, {{ user.username }}
+
+{% else %}
+
+<form role="form" method="post" action="{% url 'connection' %}">
+    {{ form }}
+    {% csrf_token %}
+     <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
+</form>
+
+
+<a href = {% url 'register' %}>Nous rejoindre</a>
+{% endif %}
+<h1>CE SOIR C'EST MAAAAATCH</h1>
