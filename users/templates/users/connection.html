@@ -10,6 +10,7 @@
 {% if user.is_authenticated %}
 bonjour, {{ user.username }}
 
+<a href="{% url 'disconnect' %}">Deconnexion</a>
 {% else %}
 
 <form role="form" method="post" action="{% url 'connection' %}">
@@ -22,3 +23,4 @@ bonjour, {{ user.username }}
 <a href = {% url 'register' %}>Nous rejoindre</a>
 {% endif %}
 <h1>CE SOIR C'EST MAAAAATCH</h1>
+

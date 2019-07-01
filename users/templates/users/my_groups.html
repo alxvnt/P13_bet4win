@@ -1,0 +1,17 @@
+{% if not team_list %}
+
+<p>Vous ne faites parti de aucun groupe</p>
+
+{% else %}
+<h2>Mes groupes :</h2>
+<li>
+{% for n in team_list %}
+    <ul> {{n.name }}
+    code : {{n.code }}
+    </ul>
+
+    {% endfor %}
+
+{% endif %}
+
+</li>

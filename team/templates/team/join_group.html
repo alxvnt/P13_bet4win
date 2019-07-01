@@ -1,0 +1,13 @@
+{% if error != 0 %}
+{% if error == 2 %}
+<p>VOus faites déja partie de ce groupe</p>
+
+{% else %}
+<p>Ce code ne correspond à aucune team</p>
+{% endif %}
+{% endif %}
+<form role="form" method="post" action="{% url 'join_group' %}">
+    {{ form }}
+    {% csrf_token %}
+     <input type="submit" value="Rejoindre" class="btn btn-info btn-block">
+</form>

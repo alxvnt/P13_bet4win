@@ -4,6 +4,8 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
+from django.contrib.auth.decorators import login_required
+
 
 def connection(request):
     """
@@ -59,4 +61,8 @@ def disconnection(request):
         Disconnect the user
     """
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/connexion')
+
+
+
+
