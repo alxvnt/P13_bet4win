@@ -8,6 +8,12 @@
 {% for n in team_list %}
     <ul> {{n.name }}
     code : {{n.code }}
+    <form class="form-inline my-2 my-lg-0" role="form" method="post" action="{% url 'leave_team' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_team" value="{{ n }}" >
+                        <button type=”submit” class="btn btn-sm btn-submit button-form">Supprimer</button>
+                    </form>
+
     </ul>
 
     {% endfor %}

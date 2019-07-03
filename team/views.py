@@ -85,3 +85,17 @@ def join_group(request):
     else:
         form = JoinTeamForm()
     return render(request, 'team/join_group.html', locals())
+
+
+def leave_team(request):
+
+    if request.method == 'POST':
+
+        current_user = request.user
+        team_name = request.POST.get('delete_team')
+        team_to_leave = Team.objects.get(name=team_name)
+        UserTeam.objects.get(id_user=current_user, id_team=team_to_leave).delete()
+        return redirect('/mes-groupes')
+
+    return render(request, 'users/my_groups.html', locals())
+
