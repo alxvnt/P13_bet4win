@@ -31,8 +31,7 @@ def new_team(request):
             creator = request.user
             team = Team.objects.create(name=name,
                                        code=code,
-                                       champ=champ,
-                                       creator=creator
+                                       champ=champ
                                        )
             team_user = UserTeam.objects.create(id_user=creator,
                                                 id_team=team,
@@ -71,12 +70,13 @@ def join_group(request):
             current_user = request.user
             if team:
                 test_team = UserTeam.objects.filter(id_user=current_user,
-                                                    id_team=team)
+                                                    id_team=team[0]
+                                                    )
                 if not test_team:
-                    UserTeam.objects.create(id_user=current_user,
-                                            id_team=team,
-                                            points=0
-                                            )
+                    create_team = UserTeam.objects.create(id_user=current_user,
+                                                          id_team=team[0],
+                                                          points=0
+                                                         )
                 else:
                     error = 2
             else:
