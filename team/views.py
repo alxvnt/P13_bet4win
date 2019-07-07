@@ -9,19 +9,29 @@ import random, string
 from django.shortcuts import get_object_or_404
 
 
-def test(request):
-    message = "salut tout le monde"
-    return HttpResponse(message)
-
-
 def random_string(stringLength=10):
-    """Generate a random string of fixed length """
+    """
+    Generate a random string of fixed length
+
+    """
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
 
 
+# def team_required():
+#     """
+#
+#     A decorator which give access to the group function
+#
+#     """
+#     pass
+
 @login_required
 def new_team(request):
+    """
+
+     Create a new team
+    """
     if request.method == 'POST':
         form = CreateTeamForm(request.POST)
         if form.is_valid():
@@ -47,7 +57,10 @@ def new_team(request):
 
 @login_required
 def my_groups(request):
+    """
+    Get all the groups of a user
 
+    """
     current_user = request.user
     user_list = UserTeam.objects.filter(id_user=current_user)
     team_list = []
@@ -60,7 +73,10 @@ def my_groups(request):
 
 @login_required
 def join_group(request):
-
+    """
+    Join a group with the key team
+     
+    """
     error = 0
     if request.method == 'POST':
         form = JoinTeamForm(request.POST)
@@ -88,7 +104,11 @@ def join_group(request):
 
 
 def leave_team(request):
+    """
 
+    Delete the access to a team for the current user
+
+    """
     if request.method == 'POST':
 
         current_user = request.user
@@ -99,3 +119,11 @@ def leave_team(request):
 
     return render(request, 'users/my_groups.html', locals())
 
+
+# def ranking_team(request):
+#     """
+#
+#     Get the ranking of a group
+#
+#     """
+#     pass
