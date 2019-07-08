@@ -1,0 +1,9 @@
+<h2>Classement de la team {{ select_team.name }}</h2>
+
+<ul>
+{% for n in team_member %}
+
+    <li> {{ n.id_user }} Point : {{ n.points }}</li>
+
+{% endfor %}
+</ul>

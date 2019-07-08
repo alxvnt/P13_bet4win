@@ -120,10 +120,23 @@ def leave_team(request):
     return render(request, 'users/my_groups.html', locals())
 
 
-# def ranking_team(request):
-#     """
-#
-#     Get the ranking of a group
-#
-#     """
-#     pass
+def ranking_team(request):
+    """
+
+    Get the ranking of a group
+
+    """
+    select_team = Team.objects.get(name='vic team')
+    team_member = UserTeam.objects.filter(id_team=select_team)
+    # list_user = []
+    # for i in team_member:
+    #     n = User.objects.get(pk=i.id_user)
+    #     list_user.append(n)
+    #     print(n.username)
+    # print(team_member[1].id_user)
+    return render(request, 'team/team_ranking.html', locals())
+
+
+def team_error(request):
+
+    return render(request, 'team/team_error.html', locals())
