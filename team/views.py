@@ -120,13 +120,14 @@ def leave_team(request):
     return render(request, 'users/my_groups.html', locals())
 
 
-def ranking_team(request):
+def ranking_team(request, team_name):
     """
 
     Get the ranking of a group
 
     """
-    select_team = Team.objects.get(name='vic team')
+    print(team_name)
+    select_team = Team.objects.get(name=team_name)
     team_member = UserTeam.objects.filter(id_team=select_team)
     # list_user = []
     # for i in team_member:
@@ -140,3 +141,9 @@ def ranking_team(request):
 def team_error(request):
 
     return render(request, 'team/team_error.html', locals())
+
+
+def test(request, name):
+
+    message = "le nom de l'album est {}".format(name)
+    return HttpResponse(message)

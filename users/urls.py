@@ -1,10 +1,10 @@
 from django.conf.urls import url
-
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    url('connexion', views.connection, name='connection'),
-    url('enregistrement', views.register, name='register'),
-    url('deco', views.disconnection, name='disconnect'),
+    path('connexion', views.connection, name='connection'),
+    path('enregistrement', views.register, name='register'),
+    path('deco', views.disconnection, name='disconnect'),
 
 ]

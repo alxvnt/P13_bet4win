@@ -6,15 +6,15 @@
 <h2>Mes groupes :</h2>
 <li>
 {% for n in team_list %}
-    <ul> {{n.name }}
+    {{n.name }}
     code : {{n.code }}
+    <a href=" {% url 'ranking' team_name=n.name %}"> Voir classement</a>
     <form class="form-inline my-2 my-lg-0" role="form" method="post" action="{% url 'leave_team' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="delete_team" value="{{ n }}" >
-                        <button type=”submit” class="btn btn-sm btn-submit button-form">Supprimer</button>
-                    </form>
+        {% csrf_token %}
+        <input type="hidden" name="delete_team" value="{{ n }}" >
+        <button type=”submit” class="btn btn-sm btn-submit button-form">Supprimer</button>
+    </form>
 
-    </ul>
 
     {% endfor %}
 
