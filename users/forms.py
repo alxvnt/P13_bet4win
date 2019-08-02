@@ -3,9 +3,9 @@ from django import forms
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        label="",
+        label="Pseudo",
         max_length=20,
-        widget=forms.TextInput(attrs={'placeholder': 'Votre pseudo', 'class': 'form-control'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Pseudo', 'class': 'form-control'}),
         required=True
     )
     password = forms.CharField(

@@ -1,26 +1,47 @@
-<h1>Bet4Win</h1>
+{% extends 'base.html' %} {% load static %}
 
 
-<h3>Devenez le meilleur pronostiqueur</h3>
-
-{% if error == True %}
-<p>Utilisateur ou mot de passe incorrect</p>
-{% endif %}
-
-{% if user.is_authenticated %}
-bonjour, {{ user.username }}
-
-<a href="{% url 'disconnect' %}">Deconnexion</a>
-{% else %}
-
-<form role="form" method="post" action="{% url 'connection' %}">
-    {{ form }}
-    {% csrf_token %}
-     <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
-</form>
+{% block header %}
+  <div class="bg" >
+    <div class="mx-auto col-lg-4">
 
 
-<a href = {% url 'register' %}>Nous rejoindre</a>
-{% endif %}
-<h1>CE SOIR C'EST MAAAAATCH</h1>
+      <form class="jumbotron" id="form" method="post" action="{% url 'connection' %}">
+       {% if user.is_authenticated %}
+          bonjour, {{ user.username }}
+          <a href="{% url 'disconnect' %}">Deconnexion</a>
+       {% else %}
+        <p class="text-center font-weight-bold">CONNEXION</p>
+        {% if error == True %}
+          <p>Utilisateur ou mot de passe incorrect</p>
+        {% endif %}
+        <div class="form-group">
+          {{ form }}
+          {% csrf_token %}
+          <small id="mail" class="form-text text-muted">
+
+          </small>
+        </div>
+
+        <div style="display: flex; justify-content: center;">
+          <button type="submit" id="login" class="btn btn-success"> Login </button>
+        </div>
+
+
+        <p class="d-flex justify-content-center" style="margin-top : 30px" ><a href="" >Pas encore inscrit ? Créer un compte </a> </p>
+      {% endif %}
+      </form>
+
+    </div>
+
+
+  <div class="offset-md-4 col-md-4">
+    <p class="text-center" style="font-weight: bold; font-size: 30px">BET 4 WIN</p>
+    <hr class="light my-4 bg-dark col-md-2">
+    <p class="text-center" style="font-weight: bold"> Devenez le meilleur parieur</p>
+  </div>
+
+</div>
+{% endblock %}
+
 

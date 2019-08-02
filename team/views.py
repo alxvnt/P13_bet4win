@@ -18,13 +18,24 @@ def random_string(stringLength=10):
     return ''.join(random.choice(letters) for i in range(stringLength))
 
 
-# def team_required():
-#     """
-#
-#     A decorator which give access to the group function
-#
-#     """
-#     pass
+def team_required(fonct):
+    """
+
+    A decorator which give access to the group function
+
+    """
+    def error_fonction(*param):
+        # request = param[0]
+        print(param)
+        # current_user = request.user
+        # current_team = UserTeam.objects.filter(id_user=current_user, id_team=param[1])
+        # if current_team:
+        #     return fonct
+        # else:
+        #     return team_error
+
+    return error_fonction()
+
 
 @login_required
 def new_team(request):
@@ -126,15 +137,17 @@ def ranking_team(request, team_name):
     Get the ranking of a group
 
     """
-    print(team_name)
-    select_team = Team.objects.get(name=team_name)
-    team_member = UserTeam.objects.filter(id_team=select_team)
-    # list_user = []
-    # for i in team_member:
-    #     n = User.objects.get(pk=i.id_user)
-    #     list_user.append(n)
-    #     print(n.username)
-    # print(team_member[1].id_user)
+    current_user = request.user
+    active_team = 1
+    select_team = Team.objects.filter(name=team_name)
+    if not select_team:
+        return render(request, 'team/team_error.html', locals())
+    current_team = UserTeam.objects.filter(id_team=select_team[0], id_user=current_user)
+    if not current_team:
+        return render(request, 'team/team_error.html', locals())
+
+    team_member = UserTeam.objects.filter(id_team=select_team[0])
+
     return render(request, 'team/team_ranking.html', locals())
 
 
