@@ -1,5 +1,7 @@
-
-
+/* ****************************************** */
+/*   PAGE CONNEXION                           */
+/*                                            */
+/* ****************************************** */
 #footer1 {
 
     padding: 8px;
@@ -15,16 +17,13 @@
 
 .bg{
     background-image: url('../img/football-argent.jpg');
-    min-height: 80vh;
+    min-height: 85vh;
     background-repeat: no-repeat;
     background-position: center;
             background-size: cover;
 }
 
-body {
+#ad {
+    padding-bottom: 10%;
 
-            min-height: 100vh;
-
-
-
-        }
+}

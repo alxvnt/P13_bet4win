@@ -10,5 +10,6 @@ urlpatterns = [
     path('quitter-team', views.leave_team, name='leave_team'),
     path('erreur-team', views.team_error, name='error-team'),
     path('classement/<str:team_name>/', views.ranking_team, name='ranking'),
+    path('championnat/<str:team_name>/', views.champ, name='champ'),
 
 ]

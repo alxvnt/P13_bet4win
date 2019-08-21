@@ -1,13 +1,30 @@
 {% extends 'base.html' %} {% load static %}
 
-{% block header %}
-<h2>Classement de la team {{ select_team.name }}</h2>
+{% block body %}
+<div class="bg offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
 
-<ul>
-{% for n in team_member %}
+        <h1 class="d-flex justify-content-center m-4">Classement du groupe {{ select_team.name }}</h1>
 
-    <li> {{ n.id_user }} Point : {{ n.points }}</li>
+        <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
+                <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Classement</th>
+                            <th scope="col">Pseudo</th>
+                            <th scope="col">Point</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for n in team_member %}
+                          <tr>
+                            <th scope="row">1 </th>
+                            <td>{{ n.id_user }}</td>
+                            <td>{{ n.points }}</td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+        </div>
 
-{% endfor %}
-</ul>
+    </div>
 {% endblock %}

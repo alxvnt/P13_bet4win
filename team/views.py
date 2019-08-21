@@ -7,7 +7,7 @@ from .models import Team, UserTeam
 from django.contrib.auth.decorators import login_required
 import random, string
 from django.shortcuts import get_object_or_404
-
+from .ApiFiles import Apifoot
 
 def random_string(stringLength=10):
     """
@@ -160,3 +160,34 @@ def test(request, name):
 
     message = "le nom de l'album est {}".format(name)
     return HttpResponse(message)
+
+
+def champ(request, team_name):
+
+    current_user = request.user
+    active_team = 1
+    select_team = Team.objects.filter(name=team_name)
+    if not select_team:
+        return render(request, 'team/team_error.html', locals())
+    current_team = UserTeam.objects.filter(id_team=select_team[0], id_user=current_user)
+    if not current_team:
+        return render(request, 'team/team_error.html', locals())
+
+    league = Apifoot()
+    standing = league.get_champ_info()
+    i=0
+    #team_class = []
+    #team_w = []
+    #team_d = []
+    #team_l = []
+    #team_point = []
+    league_dict = {}
+    while i < 20:
+        #team_class.append(standing[i]["team_name"])
+        #team_w.append(standing[i][""])
+        league_dict[standing[i]["team_name"]] = [standing[i]["overall_league_PTS"], standing[i]["overall_league_W"],
+                                                 standing[i]["overall_league_D"], standing[i]["overall_league_L"]]
+
+        i+=1
+    return render(request, 'team/championship.html', locals())
+

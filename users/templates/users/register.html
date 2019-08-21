@@ -1,12 +1,37 @@
-<h1>Rejoignez-nous sans plus attendre</h1>
+{% extends 'base.html' %} {% load static %}
+
+{% block body %}
+    <div class="bg">
+        <div class="mx-auto col-lg-4">
+
+            <form class="jumbotron" id="form" method="post" action="{% url 'register' %}">
+                <p class="text-center font-weight-bold">REJOIGNEZ-NOUS SANS PLUS ATTENDRE</p>
+                {% if error == True %}
+                    <p>Les informations rentrées sont incorrectes</p>
+                {% endif %}
+                <div class="form-group">
+                    {{ form }}
+                    {% csrf_token %}
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <button id="login" class="btn btn-success"> Login </button>
+                </div>
 
 
-{% if error == True %}
-<p>Utilisateur ou mot de passe incorrect</p>
-{% endif %}
 
-<form role="form" method="post" action="{% url 'register' %}">
-    {{ form }}
-    {% csrf_token %}
-     <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
-</form>
+            </form>
+
+        </div>
+
+
+
+    <div class="offset-md-4 col-md-4 pb-5">
+        <p class="text-center" style="font-weight: bold; font-size: 30px">BET 4 WIN</p>
+        <hr class="light my-4 bg-dark col-md-2">
+        <p class="text-center" style="font-weight: bold"> Devenez le meilleur parieur</p>
+    </div>
+</div>
+</div>
+
+{% endblock %}
