@@ -1,0 +1,31 @@
+/* ****************************************** */
+/*   PAGE CONNEXION                           */
+/*                                            */
+/* ****************************************** */
+#footer1 {
+
+    padding: 8px;
+    background-color: #345A61;
+    position: static;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+
+
+}
+
+
+
+.bg{
+    background-image: url('../img/football-argent.jpg');
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-position: center;
+            background-size: cover;
+}
+
+#ad {
+    padding-bottom: 10%;
+
+}
+

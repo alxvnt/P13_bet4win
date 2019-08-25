@@ -31,13 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav d-flex justify-content-around" style="display: inline">
 
-                <a class="nav-item nav-link" href="#">BET4WIN</a>
+                <a class="nav-item nav-link" href="{% url 'my_groups' %}">BET4WIN</a>
                 {% if user.is_authenticated %}
                   {% if active_team %}
-                    <a class="nav-item nav-link" href="#">Pari</a>
+                    <a class="nav-iteam nav-link" href="{% url 'ranking' team_name=team_name %}">Classement</a>
+                    <a class="nav-item nav-link" href="{% url 'match' team_name=team_name %}">Pari</a>
                     <a class="nav-item nav-link" href="#">Match</a>
-                    <a class="nav-item nav-link" href="#">Championnat</a>
-                    <a class="nav-item nav-link" href="#">Historique</a>
+                    <a class="nav-item nav-link" href="{% url 'champ' team_name=team_name %}">Championnat</a>
                   {% endif %}
                 <a class="nav-item nav-link" href="{% url 'disconnect' %}">Déconnexion</a>
                 {% endif %}

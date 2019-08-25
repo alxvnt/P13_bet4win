@@ -11,5 +11,7 @@ urlpatterns = [
     path('erreur-team', views.team_error, name='error-team'),
     path('classement/<str:team_name>/', views.ranking_team, name='ranking'),
     path('championnat/<str:team_name>/', views.champ, name='champ'),
+    path('match/<str:team_name>/', views.match_to_bet, name='match'),
+    path('calendrier/<str:team_name>', views.day_match, name='day_match'),
 
 ]

@@ -1,7 +1,38 @@
-<ul>
-{% for key, values in league_dict.items %}
+{% extends 'base.html' %} {% load static %}
 
-    <li> Equipe : {{key}}, G : {{values.1}}, N : {{values.2}} , D : {{values.3}}, Pts : {{values.0}}</li>
+{% block body %}
+<div class="bg">
+<div class="offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
 
-{% endfor %}
-</ul>
+        <h1 class="d-flex justify-content-center m-4">Classement Ligue 2</h1>
+
+        <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
+                <table class="table table-striped">
+                        <thead class="thead-dark">
+                          <tr>
+                                <th scope="col">Classement</th>
+                                <th scope="col">Equipe</th>
+                                <th scope="col">G</th>
+                                <th scope="col">N</th>
+                                <th scope="col">L</th>
+                                <th scope="col">Pts</th>
+                          </tr>
+                        </thead>
+                        <tbody  class="">
+                        {% for key, values in league_dict.items %}
+                          <tr>
+                                <th scope="col">{{values.4}}</th>
+                                <th scope="col">{{ key }}</th>
+                                <th scope="col">{{values.1}}</th>
+                                <th scope="col">{{values.2}}</th>
+                                <th scope="col">{{values.3}}</th>
+                                <th scope="col">{{values.0}}</th>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -21,6 +21,7 @@ def connection(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
+                return redirect('/mes-groupes')
             else:
                 error = True
     else:

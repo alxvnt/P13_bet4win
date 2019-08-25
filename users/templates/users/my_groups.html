@@ -1,23 +1,43 @@
-{% if not team_list %}
+{% extends 'base.html' %} {% load static %}
 
-<p>Vous ne faites parti de aucun groupe</p>
+{% block body %}
+<div class="bg" >
+<div class=" offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
 
-{% else %}
-<h2>Mes groupes :</h2>
-<li>
-{% for n in team_list %}
-    {{n.name }}
-    code : {{n.code }}
-    <a href=" {% url 'ranking' team_name=n.name %}"> Voir classement</a>
-    <form class="form-inline my-2 my-lg-0" role="form" method="post" action="{% url 'leave_team' %}">
-        {% csrf_token %}
-        <input type="hidden" name="delete_team" value="{{ n }}" >
-        <button type=”submit” class="btn btn-sm btn-submit button-form">Supprimer</button>
-    </form>
+        <h1 class="d-flex justify-content-center m-4">Mes groupes</h1>
 
-
-    {% endfor %}
-
-{% endif %}
-
-</li>
+        <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
+                {% if not team_list %}
+                    <p>Vous ne faites partie d'aucun groupe</p>
+                {% else %}
+                <table class="table table-striped">
+                        <thead class="thead-dark">
+                          <tr>
+                                <th scope="col">Groupe</th>
+                                <th scope="col">Championnat</th>
+                                <th scope="col">Clé du groupe</th>
+                                <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody  class="">
+                        {% for n in team_list %}
+                          <tr>
+                              <th scope="col"><a href=" {% url 'ranking' team_name=n.name %}">{{n.name}}</a></th>
+                              <th scope="col">Ligue 2</th>
+                              <th scope="col">{{ n.code}}</th>
+                              <th scope="col">
+                                  <form class="form-inline my-2 my-lg-0" role="form" method="post" action="{% url 'leave_team' %}">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="delete_team" value="{{ n }}" >
+                                      <button type=”submit” class="btn btn-sm btn-submit button-form">Quitter le groupe</button>
+                                  </form>
+                              </th>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

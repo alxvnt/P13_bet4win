@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .forms import CreateTeamForm, JoinTeamForm
+from .forms import CreateTeamForm, JoinTeamForm, DayChampForm
 from django.shortcuts import render, redirect
 from .models import Team, UserTeam
 from django.contrib.auth.decorators import login_required
-import random, string
-from django.shortcuts import get_object_or_404
+import random
+import string
+import datetime
+from datetime import date, datetime, timedelta
 from .ApiFiles import Apifoot
+
 
 def random_string(stringLength=10):
     """
@@ -156,14 +159,8 @@ def team_error(request):
     return render(request, 'team/team_error.html', locals())
 
 
-def test(request, name):
-
-    message = "le nom de l'album est {}".format(name)
-    return HttpResponse(message)
-
-
+@login_required
 def champ(request, team_name):
-
     current_user = request.user
     active_team = 1
     select_team = Team.objects.filter(name=team_name)
@@ -175,19 +172,91 @@ def champ(request, team_name):
 
     league = Apifoot()
     standing = league.get_champ_info()
-    i=0
-    #team_class = []
-    #team_w = []
-    #team_d = []
-    #team_l = []
-    #team_point = []
+    i = 0
     league_dict = {}
     while i < 20:
-        #team_class.append(standing[i]["team_name"])
-        #team_w.append(standing[i][""])
         league_dict[standing[i]["team_name"]] = [standing[i]["overall_league_PTS"], standing[i]["overall_league_W"],
-                                                 standing[i]["overall_league_D"], standing[i]["overall_league_L"]]
+                                                 standing[i]["overall_league_D"], standing[i]["overall_league_L"],
+                                                 standing[i]["overall_league_position"]]
 
-        i+=1
+        i += 1
     return render(request, 'team/championship.html', locals())
 
+
+@login_required
+def day_match(request, team_name):
+    current_user = request.user
+    active_team = 1
+    select_team = Team.objects.filter(name=team_name)
+    if not select_team:
+        return render(request, 'team/team_error.html', locals())
+    current_team = UserTeam.objects.filter(id_team=select_team[0], id_user=current_user)
+    if not current_team:
+        return render(request, 'team/team_error.html', locals())
+
+    if request.method == 'POST':
+        form = DayChampForm(request.POST)
+        if form.is_valid():
+            form_date = form.cleaned_data['date']
+
+            day = datetime.strptime(form_date, '%Y-%m-%d')
+            league = Apifoot()
+            x = timedelta(days=7)
+            week = day + x
+            match_day = league.get_match(str(day), str(week))
+
+            i = 0
+            league_dict = {}
+            while i < 9:
+                league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"], match_day[i]["match_hometeam_name"],
+                                  match_day[i]["match_hometeam_score"], match_day[i]["match_awayteam_score"],
+                                  match_day[i]["match_awayteam_name"]]
+                i += 1
+
+    else:
+        form = DayChampForm()
+        league = Apifoot()
+        today = date.today()
+
+        x = timedelta(days=7)
+        week = today + x
+        match_day = league.get_match(str(today), str(week))
+        i = 0
+        league_dict = {}
+        while i < 9:
+            league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"],
+                              match_day[i]["match_hometeam_name"],
+                              match_day[i]["match_hometeam_score"], match_day[i]["match_awayteam_score"],
+                              match_day[i]["match_awayteam_name"]]
+            i += 1
+    return render(request, 'team/match_of_the_day.html', locals())
+
+
+def match_to_bet(request, team_name):
+    current_user = request.user
+    active_team = 1
+    select_team = Team.objects.filter(name=team_name)
+    if not select_team:
+        return render(request, 'team/team_error.html', locals())
+    current_team = UserTeam.objects.filter(id_team=select_team[0], id_user=current_user)
+    if not current_team:
+        return render(request, 'team/team_error.html', locals())
+
+    league = Apifoot()
+    today = date.today()
+
+    x = datetime.timedelta(days=7)
+    week = today + x
+    match_day = league.get_match(str(today), str(week))
+
+    i = 0
+
+    # ajouter la partie de récupération des odds
+    if match_day:
+        league_dict = {}
+        while i < 9:
+            league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"], match_day[i]["match_hometeam_name"],
+                              match_day[i]["match_hometeam_score"], match_day[i]["match_awayteam_score"],
+                              match_day[i]["match_awayteam_name"]]
+            i += 1
+    return render(request, 'team/match_to_bet.html', locals())
