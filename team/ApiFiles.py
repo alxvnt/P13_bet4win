@@ -54,14 +54,35 @@ class Apifoot:
 
 def main():
     gmap = Apifoot()
-    date1 = "2019-07-29"
-    date2 = "2019-08-02"
-    standing = gmap.get_odds(date1, date2)
+    date1 = "2019-08-21"
+    date2 = "2019-08-23"
+    match_odds = gmap.get_odds(date1, date2)
     i=0
+    match = gmap.get_match(date1, date2)
+    i = 0
+    id_list = []
+    while i < len(match):
+        id_list.append(match[i]["match_id"])
+        i += 1
+    print(id_list)
 
-    print(standing[i]["odd_1"])
-    print(standing[i]["odd_x"])
-    print(standing[i]["odd_2"])
+    dic_odds = {}
+    z = 0
+    for x in id_list:
+        y = 0
+        while y < len(match_odds):
+            if match_odds[y]["match_id"] == x:
+                dic_odds[id_list[z]] = [match_odds[y]["odd_1"], match_odds[y]["odd_x"], match_odds[y]["odd_2"]]
+                y = len(match_odds)
+            y += 1
+        z += 1
+
+    print(dic_odds)
+    print(dic_odds['229006'][2])
+
+    # print(standing[i]["odd_1"])
+    # print(standing[i]["odd_x"])
+    # print(standing[i]["odd_2"])
     #    print(country[i]["match_hometeam_name"] + " vs " + country[i]["match_awayteam_name"])
     #    i+=1
 

@@ -4,7 +4,7 @@
 <div class="bg">
 <div class="offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
 
-        <h1 class="d-flex justify-content-center m-4">Classement Ligue 2</h1>
+        <h1 class="d-flex justify-content-center m-4">Mes paris</h1>
 
         <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
                 <table class="table table-striped">
@@ -23,9 +23,17 @@
                             {% for key, values in league_dict.items %}
                             <tr>
                                 <th scope="col">{{values.0}}</th>
+                                <th scope="col"></th>
                                 <th scope="col">{{values.1}}</th>
+                                <th scope="col">N</th>
                                 <th scope="col">{{values.2}}</th>
-                                <th scope="col">{{values.3}} - {{values.4}}</th>
+                                <th scope="col"></th>
+                            </tr>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col">{{values.3}}</th>
+                                <th scope="col">{{values.4}}</th>
                                 <th scope="col">{{values.5}}</th>
                             </tr>
                             {% endfor %}

@@ -243,20 +243,55 @@ def match_to_bet(request, team_name):
         return render(request, 'team/team_error.html', locals())
 
     league = Apifoot()
-    today = date.today()
-
-    x = datetime.timedelta(days=7)
-    week = today + x
+    #today = date.today()
+    today = "2019-08-21"
+    week = "2019-08-23"
+    x = timedelta(days=3)
+    #week = today + x
+    # get 2 json which contains odds list and match details
     match_day = league.get_match(str(today), str(week))
-
+    match_odds = league.get_odds(str(today), str(week))
     i = 0
 
     # ajouter la partie de récupération des odds
-    if match_day:
+    # if match_day[0]:
+    #     league_dict = {}
+    #     while i < len(match_day):
+    #         league_dict[i] = [match_day[i]["match_id"], match_day[i]["match_date"], match_day[i]["match_hometeam_name"],
+    #                           match_day[i]["match_awayteam_name"]]
+    #
+    #         i += 1
+
+    # Get a list of the id from the match
+    if match_day[0]:
         league_dict = {}
-        while i < 9:
-            league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"], match_day[i]["match_hometeam_name"],
-                              match_day[i]["match_hometeam_score"], match_day[i]["match_awayteam_score"],
-                              match_day[i]["match_awayteam_name"]]
+        id_list = []
+        while i < len(match_day):
+            id_list.append(match_day[i]["match_id"])
             i += 1
+        dic_odds = {}
+        # initalize counter to browse id_list
+        z = 0
+        for x in id_list:
+            y = 0
+            while y < len(match_odds):
+                if match_odds[y]["match_id"] == x:
+                    dic_odds[id_list[z]] = [match_odds[y]["odd_1"], match_odds[y]["odd_x"], match_odds[y]["odd_2"]]
+                    y = len(match_odds)
+                y += 1
+            z += 1
+        league_dict = {}
+        f = 0
+        print(dic_odds)
+        while f < len(match_day):
+            league_dict[f] = [match_day[f]["match_date"], match_day[f]["match_hometeam_name"],
+                              match_day[f]["match_awayteam_name"],
+                              dic_odds[match_day[f]["match_id"]][0],
+                              dic_odds[match_day[f]["match_id"]][1],
+                              dic_odds[match_day[f]["match_id"]][2]
+                              ]
+            f += 1
     return render(request, 'team/match_to_bet.html', locals())
+
+
+def my_bet(request):
