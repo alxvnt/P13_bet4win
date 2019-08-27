@@ -14,7 +14,7 @@ class Team(models.Model):
 class UserTeam(models.Model):
     id_user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user in this group')
     id_team = models.ForeignKey(Team, on_delete=models.CASCADE, verbose_name='a group of the user')
-    points = models.DecimalField(max_digits=5, decimal_places=2)
+    points = models.IntegerField()
 
 
 class MyBet(models.Model):

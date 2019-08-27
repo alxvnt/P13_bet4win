@@ -1,6 +1,3 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.models import User
 from .forms import CreateTeamForm, JoinTeamForm, DayChampForm
 from django.shortcuts import render, redirect
 from .models import Team, UserTeam, MyBet
@@ -19,25 +16,6 @@ def random_string(stringLength=10):
     """
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
-
-
-def team_required(fonct):
-    """
-
-    A decorator which give access to the group function
-
-    """
-    def error_fonction(*param):
-        # request = param[0]
-        print(param)
-        # current_user = request.user
-        # current_team = UserTeam.objects.filter(id_user=current_user, id_team=param[1])
-        # if current_team:
-        #     return fonct
-        # else:
-        #     return team_error
-
-    return error_fonction()
 
 
 @login_required
@@ -155,12 +133,21 @@ def ranking_team(request, team_name):
 
 
 def team_error(request):
+    """
+
+    return a 404 page
+    """
 
     return render(request, 'team/team_error.html', locals())
 
 
 @login_required
 def champ(request, team_name):
+    """
+
+    return the rank of the championship
+    """
+
     current_user = request.user
     active_team = 1
     select_team = Team.objects.filter(name=team_name)
@@ -185,6 +172,11 @@ def champ(request, team_name):
 
 @login_required
 def day_match(request, team_name):
+    """
+
+    return a calendar of the previous and next match
+
+    """
     current_user = request.user
     active_team = 1
     select_team = Team.objects.filter(name=team_name)
@@ -233,6 +225,10 @@ def day_match(request, team_name):
 
 
 def match_to_bet(request, team_name):
+    """
+
+    return a calendar of the match which the user can bet
+    """
     current_user = request.user
     active_team = 1
     select_team = Team.objects.filter(name=team_name)
@@ -243,24 +239,15 @@ def match_to_bet(request, team_name):
         return render(request, 'team/team_error.html', locals())
 
     league = Apifoot()
-    #today = date.today()
-    today = "2019-08-21"
-    week = "2019-08-23"
-    x = timedelta(days=3)
-    #week = today + x
+    today = date.today()
+    #today = "2019-08-21"
+    #week = "2019-08-23"
+    x = timedelta(days=2)
+    week = today + x
     # get 2 json which contains odds list and match details
     match_day = league.get_match(str(today), str(week))
     match_odds = league.get_odds(str(today), str(week))
     i = 0
-
-    # ajouter la partie de récupération des odds
-    # if match_day[0]:
-    #     league_dict = {}
-    #     while i < len(match_day):
-    #         league_dict[i] = [match_day[i]["match_id"], match_day[i]["match_date"], match_day[i]["match_hometeam_name"],
-    #                           match_day[i]["match_awayteam_name"]]
-    #
-    #         i += 1
 
     # Get a list of the id from the match
     if match_day[0]:
@@ -295,7 +282,10 @@ def match_to_bet(request, team_name):
 
 
 def my_bet(request, team_name, id_match, prono):
+    """
 
+    Save the bet which the user did
+    """
     current_user = request.user
     team = Team.objects.get(name=team_name)
     user_info = UserTeam.objects.get(id_user=current_user, id_team=team)

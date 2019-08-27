@@ -1,18 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .forms import CreateTeamForm, JoinTeamForm, DayChampForm
-from django.shortcuts import render, redirect
 from .models import Team, UserTeam, MyBet
-from django.contrib.auth.decorators import login_required
-import random
-import string
-import datetime
-from datetime import date, datetime, timedelta
 from .ApiFiles import Apifoot
 from django.test import TestCase
-from django.contrib.auth import authenticate
-from django.urls import reverse
 
 
 class TeamTestCase(TestCase):
