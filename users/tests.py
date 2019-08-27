@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 class IndexPageTest(TestCase):
@@ -55,3 +56,15 @@ class LoginTestCase(TestCase):
             self.assertEqual(True, True)
         except:
             self.assertEqual(True, False)
+
+
+class LoginTest(TestCase):
+
+    def setUp(self):
+        self.new_user = User.objects.create(email="nouveau@test.com", password="new_password")
+
+    def test_login(self):
+        self.logging = authenticate(email="nouveau@test.com", password="new_password")
+        if self.logging:
+            response = self.client.get(self.logging)
+            self.assertEqual(response['email'], "nouveau@test.com")

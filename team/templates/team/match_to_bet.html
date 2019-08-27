@@ -32,9 +32,16 @@
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
-                                <th scope="col">{{values.3}}</th>
-                                <th scope="col">{{values.4}}</th>
-                                <th scope="col">{{values.5}}</th>
+                                <th scope="col">
+
+                                    <a href = {% url 'my_bet' team_name=team_name  id_match=values.6  prono="1"%}>{{values.3}}</a>
+                                </th>
+                                <th scope="col">
+                                    <a href = {% url 'my_bet' team_name=team_name id_match=values.6 prono="n"%}>{{values.4}}</a>
+                                </th>
+                                <th scope="col">
+                                    <a href = {% url 'my_bet' team_name=team_name id_match=values.6 prono="2"%}> {{values.5}} </a>
+                                </th>
                             </tr>
                             {% endfor %}
                         {% else %}

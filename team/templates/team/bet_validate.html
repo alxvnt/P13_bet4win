@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %}
+
+
+{% block header %}
+  <div class="bg" >
+    <div class="mx-auto col-lg-4">
+
+
+      <div class="jumbotron"">
+       {% if error == 0 %}
+          <p> Votre pari a bien été enregistré</p>
+       {% else %}
+          <p>Vous avez déjà parié sur ce match</p>
+      {% endif %}
+          <a href={% url 'match' team_name=team_name %}>Retournez à mes paris</a>
+      </div>
+
+    </div>
+
+{% endblock %}

@@ -13,5 +13,6 @@ urlpatterns = [
     path('championnat/<str:team_name>/', views.champ, name='champ'),
     path('match/<str:team_name>/', views.match_to_bet, name='match'),
     path('calendrier/<str:team_name>', views.day_match, name='day_match'),
+    path('pari/<str:team_name>/<str:id_match>/<str:prono>', views.my_bet, name='my_bet')
 
 ]

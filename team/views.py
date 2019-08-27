@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .forms import CreateTeamForm, JoinTeamForm, DayChampForm
 from django.shortcuts import render, redirect
-from .models import Team, UserTeam
+from .models import Team, UserTeam, MyBet
 from django.contrib.auth.decorators import login_required
 import random
 import string
@@ -282,16 +282,29 @@ def match_to_bet(request, team_name):
             z += 1
         league_dict = {}
         f = 0
-        print(dic_odds)
         while f < len(match_day):
             league_dict[f] = [match_day[f]["match_date"], match_day[f]["match_hometeam_name"],
                               match_day[f]["match_awayteam_name"],
                               dic_odds[match_day[f]["match_id"]][0],
                               dic_odds[match_day[f]["match_id"]][1],
-                              dic_odds[match_day[f]["match_id"]][2]
+                              dic_odds[match_day[f]["match_id"]][2],
+                              match_day[f]["match_id"]
                               ]
             f += 1
     return render(request, 'team/match_to_bet.html', locals())
 
 
-def my_bet(request):
+def my_bet(request, team_name, id_match, prono):
+
+    current_user = request.user
+    team = Team.objects.get(name=team_name)
+    user_info = UserTeam.objects.get(id_user=current_user, id_team=team)
+
+    bet = MyBet.objects.filter(id_user_team=user_info, id_match=id_match)
+    if bet:
+        error = 1
+    else:
+        new_bet = MyBet(id_user_team=user_info, id_match=id_match, match_bet=prono)
+        new_bet.save()
+        error = 0
+    return render(request, 'team/bet_validate.html', locals())
