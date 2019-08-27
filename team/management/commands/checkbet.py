@@ -11,11 +11,11 @@ class Command(BaseCommand):
 
     def bet_actualize(self, match_result, bet, odds):
         # on récupère l'id de l'objet bet
-        id = bet.id_match
+        #id = bet.id_match
         # on récupère dans match result l'id du match
-        i = 0
+        #i = 0
         #while i < len(match_result):
-        match = match_result[]
+        #match = match_result[]
         # si le score hometeam > awayteam
         # bet.result = 1
         # si le score hometeam < awaayteam
@@ -26,6 +26,7 @@ class Command(BaseCommand):
         # on récupère l'id dans match odds et la cote correspondante
         # on récupère le user team et on augemente ses points de cote *100
         # on passe la valeur True à bet validate
+        pass
 
     def handle(self, *args, **options):
         league = Apifoot()

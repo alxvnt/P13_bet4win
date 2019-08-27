@@ -250,7 +250,7 @@ def match_to_bet(request, team_name):
     i = 0
 
     # Get a list of the id from the match
-    if match_day[0]:
+    if not match_day['error']:
         league_dict = {}
         id_list = []
         while i < len(match_day):
