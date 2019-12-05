@@ -59,7 +59,7 @@ def main():
     today = date.today()
 
     i=0
-    match = gmap.get_match('2019/08/09', str(today))
+    match = gmap.get_match('2019/12/05', '2019/12/12')
     i = 0
     id_list = []
     print(match)
@@ -70,7 +70,7 @@ def main():
     #    print(country[i]["match_hometeam_name"] + " vs " + country[i]["match_awayteam_name"])
     #    i+=1
 
-#main()
+main()
 
 
 week_dict = {

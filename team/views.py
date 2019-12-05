@@ -213,14 +213,17 @@ def day_match(request, team_name):
         x = timedelta(days=7)
         week = today + x
         match_day = league.get_match(str(today), str(week))
-        i = 0
+
         league_dict = {}
-        while i < 9:
-            league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"],
-                              match_day[i]["match_hometeam_name"],
-                              match_day[i]["match_hometeam_score"], match_day[i]["match_awayteam_score"],
-                              match_day[i]["match_awayteam_name"]]
-            i += 1
+
+        if not match_day["error"]:
+            i = 0
+            while i < 9:
+                league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"],
+                                  match_day[i]["match_hometeam_name"],
+                                  match_day[i]["match_hometeam_score"], match_day[i]["match_awayteam_score"],
+                                  match_day[i]["match_awayteam_name"]]
+                i += 1
     return render(request, 'team/match_of_the_day.html', locals())
 
 
