@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import requests
+from datetime import date, datetime, timedelta
 
 
 class Apifoot:
@@ -55,30 +56,13 @@ class Apifoot:
 def main():
     gmap = Apifoot()
     date1 = "2019-08-21"
-    date2 = "2019-08-23"
-    match_odds = gmap.get_odds(date1, date2)
+    today = date.today()
+
     i=0
-    match = gmap.get_match(date1, date2)
+    match = gmap.get_match('2019/08/09', str(today))
     i = 0
     id_list = []
-    while i < len(match):
-        id_list.append(match[i]["match_id"])
-        i += 1
-    print(id_list)
-
-    dic_odds = {}
-    z = 0
-    for x in id_list:
-        y = 0
-        while y < len(match_odds):
-            if match_odds[y]["match_id"] == x:
-                dic_odds[id_list[z]] = [match_odds[y]["odd_1"], match_odds[y]["odd_x"], match_odds[y]["odd_2"]]
-                y = len(match_odds)
-            y += 1
-        z += 1
-
-    print(dic_odds)
-    print(dic_odds['229006'][2])
+    print(match)
 
     # print(standing[i]["odd_1"])
     # print(standing[i]["odd_x"])

@@ -55,7 +55,7 @@ class ApiTestCase(TestCase):
 
     def test_fail_api(self):
         response = self.client.get('https://apiv2.apifootball.com/?action=test123&APIkey=123123')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_get_match_id(self):
         league = Apifoot()

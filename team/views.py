@@ -248,9 +248,11 @@ def match_to_bet(request, team_name):
     match_day = league.get_match(str(today), str(week))
     match_odds = league.get_odds(str(today), str(week))
     i = 0
-
     # Get a list of the id from the match
-    if not match_day['error']:
+    res = isinstance(match_day, dict)
+    if res:
+        pass
+    else:
         league_dict = {}
         id_list = []
         while i < len(match_day):
