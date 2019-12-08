@@ -30,7 +30,6 @@ class Command(BaseCommand):
                 y += 1
         z = 0
         while z < len(odds):
-            #print(match_result[y]["match_id"])
             if match_result[z]["match_id"] == str(id):
                 odds_data = odds[z]
                 print(odds_data[z])
@@ -39,11 +38,9 @@ class Command(BaseCommand):
             else:
                 z += 1
         print("test")
-        # si le score hometeam > awayteam
         if res["match_hometeam_score"] > res["match_awayteam_score"]:
             bet.result = 1
             bet.save()
-        # si le score hometeam < awaayteam
         elif res["match_hometeam_score"] < res["match_awayteam_score"]:
             bet.result = 2
             bet.save()
@@ -76,8 +73,8 @@ class Command(BaseCommand):
         x = timedelta(days=1)
         day = today - x
         waiting_bet = MyBet.objects.filter(bet_validate=False)
-        match_result = league.get_match('2019/09/08', '2019/11/27')
-        match_odds = league.get_odds('2019/11/08', '2019/11/10')
+        match_result = league.get_match(str(day), str(today))
+        match_odds = league.get_odds(str(day), str(today))
         if match_result and waiting_bet:
             for c in waiting_bet:
                 self.bet_actualize(match_result, c, match_odds)

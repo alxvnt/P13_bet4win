@@ -39,7 +39,7 @@ def new_team(request):
                                                 id_team=team,
                                                 points=0
                                                 )
-            return redirect('/connexion')
+            return redirect('/mes-groupes')
 
     else:
         form = CreateTeamForm()
@@ -85,6 +85,7 @@ def join_group(request):
                                                           id_team=team[0],
                                                           points=0
                                                          )
+                    return redirect('/mes-groupes')
                 else:
                     error = 2
             else:
@@ -215,8 +216,9 @@ def day_match(request, team_name):
         match_day = league.get_match(str(today), str(week))
 
         league_dict = {}
-
-        if not match_day["error"]:
+        print(match_day)
+        res = isinstance(match_day, dict)
+        if res:
             i = 0
             while i < 9:
                 league_dict[i] = [match_day[i]["match_date"], match_day[i]["match_time"],
@@ -253,9 +255,7 @@ def match_to_bet(request, team_name):
     i = 0
     # Get a list of the id from the match
     res = isinstance(match_day, dict)
-    if res:
-        pass
-    else:
+    if not res:
         league_dict = {}
         id_list = []
         while i < len(match_day):

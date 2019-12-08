@@ -16,14 +16,60 @@
 
 
 .bg{
-    background-image: url('../img/football-argent.jpg');
+    background-image: url('../img/stadium.jpeg');
     min-height: 85vh;
     background-repeat: no-repeat;
     background-position: center;
-            background-size: cover;
+    background-size: cover;
+}
+
+
+
+.bg-match_of_the_day{
+    background-image: url('../img/stadium.jpeg');
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-ranking{
+    background-image: url('../img/stadium02.jpeg');
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-match_to_bet{
+    background-image: url('../img/pari.jpg');
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-team {
+    background-image: url('../img/team1.jpeg');
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+
+#error {
+
+    padding: 3%;
 }
 
 #ad {
     padding-bottom: 10%;
 
+}
+
+footer a {
+
+    color: white;
 }

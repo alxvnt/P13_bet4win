@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% load static %}
 
 {% block body %}
-<div class="bg offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
+<div class="bg-ranking">
+<div class="offset-md-2 col-md-8 border border bg-light align-items-center" style="height : 100%">
 
-        <h1 class="d-flex justify-content-center m-4">Classement du groupe {{ select_team.name }}</h1>
-
-        <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
+       <h1 class="d-flex justify-content-center m-4">Classement du groupe</h1>
+        <div class="d-flex border-top  border-dark justify-content-around bg-light">
                 <table class="table">
                         <thead>
                           <tr>
@@ -27,4 +27,5 @@
         </div>
 
     </div>
+</div>
 {% endblock %}

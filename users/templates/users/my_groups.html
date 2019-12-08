@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% load static %}
 
 {% block body %}
-<div class="bg" >
-<div class=" offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
+<div class="bg-team" >
+<div class=" offset-md-2 col-md-8 border border bg-light align-items-center" style="height : 100%">
 
         <h1 class="d-flex justify-content-center m-4">Mes groupes</h1>
 
-        <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
+        <div class="d-flex border-top  border-dark justify-content-around bg-light">
                 {% if not team_list %}
                     <p>Vous ne faites partie d'aucun groupe</p>
                 {% else %}
@@ -34,10 +34,15 @@
                               </th>
                           </tr>
                         {% endfor %}
+
                         </tbody>
                       </table>
+
             {% endif %}
+
         </div>
+        <a href="{% url 'new_team' %}"> Créer </a> ou
+        <a href="{% url 'join_group' %}"> Rejoindre  </a> un groupe
     </div>
 </div>
 {% endblock %}

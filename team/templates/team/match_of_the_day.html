@@ -1,16 +1,16 @@
 {% extends 'base.html' %} {% load static %}
 
 {% block body %}
-<div class="bg">
-<div class="offset-md-2 col-md-8 border border-dark bg-light align-items-center" style="height : 100%">
+<div class="bg-match_of_the_day">
+<div class="offset-md-2 col-md-8 border border bg-light align-items-center" style="height : 100%">
 
         <h1 class="d-flex justify-content-center m-4">Classement Ligue 2</h1>
 
-        <div class="d-flex border-top border-bottom border-dark justify-content-around bg-light">
+        <div class="d-flex border-dark justify-content-around bg-light">
                 <table class="table table-striped">
                         <thead class="thead-dark">
                           <tr>
-                                <th scope="col">
+
                                     <form role="form" method="post" action="{% url 'day_match' team_name=team_name %}">
                                         {{ form }}
                                         {% csrf_token %}

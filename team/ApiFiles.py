@@ -70,7 +70,7 @@ def main():
     #    print(country[i]["match_hometeam_name"] + " vs " + country[i]["match_awayteam_name"])
     #    i+=1
 
-main()
+#main()
 
 
 week_dict = {

@@ -1,13 +1,33 @@
-{% if error != 0 %}
-{% if error == 2 %}
-<p>VOus faites déja partie de ce groupe</p>
+{% extends 'base.html' %} {% load static %}
 
-{% else %}
-<p>Ce code ne correspond à aucune team</p>
-{% endif %}
-{% endif %}
-<form role="form" method="post" action="{% url 'join_group' %}">
-    {{ form }}
-    {% csrf_token %}
-     <input type="submit" value="Rejoindre" class="btn btn-info btn-block">
-</form>
+{% block body %}
+    <div class="bg">
+        <div class="mx-auto col-lg-4">
+            {% if error != 0 %}
+                {% if error == 2 %}
+                    <p>VOus faites déja partie de ce groupe</p>
+
+                {% else %}
+                <p>Ce code ne correspond à aucune team</p>
+                {% endif %}
+            {% endif %}
+            <form class="jumbotron" id="form" method="post" action="{% url 'join_group' %}">
+                <p class="text-center font-weight-bold">REJOIGNEZ-NOUS SANS PLUS ATTENDRE</p>
+                <div class="form-group">
+                    {{ form }}
+                    {% csrf_token %}
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <button id="login" class="btn btn-success"> Rejoindre ce groupe </button>
+                </div>
+
+
+
+            </form>
+
+        </div>
+</div>
+</div>
+
+{% endblock %}

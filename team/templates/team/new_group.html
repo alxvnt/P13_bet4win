@@ -1,12 +1,27 @@
-<h2>Créer un groupe</h2>
-
-<form role="form" method="post" action="{% url 'new_team' %}">
-    {{ form }}
-    {% csrf_token %}
-     <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
-</form>
 
 
-<h2>Rejoindre un groupe</h2>
+{% extends 'base.html' %} {% load static %}
 
-Entrez la clé du groupe
+{% block body %}
+    <div class="bg">
+        <div class="mx-auto col-lg-4">
+            <form class="jumbotron" id="form" method="post" action="{% url 'new_team' %}">
+                <p class="text-center font-weight-bold">REJOIGNEZ-NOUS SANS PLUS ATTENDRE</p>
+                <div class="form-group">
+                    {{ form }}
+                    {% csrf_token %}
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <button id="login" class="btn btn-success"> Rejoindre ce groupe </button>
+                </div>
+
+
+
+            </form>
+
+        </div>
+</div>
+</div>
+
+{% endblock %}
