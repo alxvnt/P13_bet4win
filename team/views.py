@@ -7,6 +7,7 @@ import string
 import datetime
 from datetime import date, datetime, timedelta
 from .ApiFiles import Apifoot
+import itertools
 
 
 def random_string(stringLength=10):
@@ -128,7 +129,13 @@ def ranking_team(request, team_name):
     if not current_team:
         return render(request, 'team/team_error.html', locals())
 
-    team_member = UserTeam.objects.filter(id_team=select_team[0])
+    get_team_member = UserTeam.objects.filter(id_team=select_team[0])
+
+    team_member = []
+    for member in get_team_member:
+        team_member.append(member)
+
+    team_member.sort(key=lambda x: x.points, reverse=True)
 
     return render(request, 'team/team_ranking.html', locals())
 
