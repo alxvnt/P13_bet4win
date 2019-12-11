@@ -7,7 +7,6 @@ import string
 import datetime
 from datetime import date, datetime, timedelta
 from .ApiFiles import Apifoot
-import itertools
 
 
 def random_string(stringLength=10):
@@ -262,6 +261,7 @@ def match_to_bet(request, team_name):
     i = 0
     # Get a list of the id from the match
     res = isinstance(match_day, dict)
+    print(match_odds)
     if not res:
         league_dict = {}
         id_list = []
@@ -282,13 +282,16 @@ def match_to_bet(request, team_name):
         league_dict = {}
         f = 0
         while f < len(match_day):
-            league_dict[f] = [match_day[f]["match_date"], match_day[f]["match_hometeam_name"],
-                              match_day[f]["match_awayteam_name"],
-                              dic_odds[match_day[f]["match_id"]][0],
-                              dic_odds[match_day[f]["match_id"]][1],
-                              dic_odds[match_day[f]["match_id"]][2],
-                              match_day[f]["match_id"]
-                              ]
+            try:
+                league_dict[f] = [match_day[f]["match_date"], match_day[f]["match_hometeam_name"],
+                                  match_day[f]["match_awayteam_name"],
+                                  dic_odds[match_day[f]["match_id"]][0],
+                                  dic_odds[match_day[f]["match_id"]][1],
+                                  dic_odds[match_day[f]["match_id"]][2],
+                                  match_day[f]["match_id"]
+                                ]
+            except KeyError:
+                print('pas de cotes pour ce match')
             f += 1
     return render(request, 'team/match_to_bet.html', locals())
 
