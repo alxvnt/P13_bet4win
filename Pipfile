@@ -10,7 +10,6 @@ django = "*"
 requests = "*"
 psycopg2 = "*"
 datetime = "*"
-itertools = "*"
 
 [requires]
 python_version = "3.6"
