@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7d-6)0h98vbvgr^5tjgm61r+kaqhvp+#&uit8x@hcsb40-sbk$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['138.197.67.65']
 
 
 # Application definition
@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'bet4win_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'betfourwin',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bet4win',
+        'USER': 'alxvnt',
+        'PASSWORD': 'Projet13OC',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }
