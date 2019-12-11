@@ -53,6 +53,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'bet4win_project.urls'
 
+TEMP_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -132,8 +134,8 @@ LOGIN_URL = '/connexion/'
 
 
 STATICFILES_DIRS = (
-    os.path.join(TEMP_DIR, "static"),
+    os.path.join(TEMP_DIR, "P13_bet4win/static"),
 )
 
 
-STATIC_ROOT = os.path.join(TEMP_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(TEMP_DIR, 'P13_bet4win/staticfiles')

@@ -261,7 +261,6 @@ def match_to_bet(request, team_name):
     i = 0
     # Get a list of the id from the match
     res = isinstance(match_day, dict)
-    print(match_odds)
     if not res:
         league_dict = {}
         id_list = []
