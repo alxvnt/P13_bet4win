@@ -12,16 +12,6 @@ class Apifoot:
         self.key = "70a1b277077102cde419bf66e69fe71f62b476110606efb3e62666c8ec0b3dab"
         self.id_league = "177"
 
-    # return the lat and the lng of the attribute question
-    def get_all_country(self):
-        action = "get_countries"
-        response = requests.get(self.url + action + "&APIkey=" + self.key)
-        resp_json = response.json()
-        try:
-            return resp_json[1]["country_id"]
-        except IndexError:
-            return "1"
-
     def get_match(self, date1, date2):
         action = "get_events&from="
         response = requests.get(self.url + action + date1 + "&to=" + date2 +
@@ -29,6 +19,16 @@ class Apifoot:
         resp_json = response.json()
         try:
             return resp_json
+        except IndexError:
+            return "1"
+
+        # return the lat and the lng of the attribute question
+    def get_all_country(self):
+        action = "get_countries"
+        response = requests.get(self.url + action + "&APIkey=" + self.key)
+        resp_json = response.json()
+        try:
+            return resp_json[1]["country_id"]
         except IndexError:
             return "1"
 

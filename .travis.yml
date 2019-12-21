@@ -1,0 +1,19 @@
+language: python
+
+python:
+  - "3.6"
+
+before_script:
+  - pip install pipenv
+  - pipenv install
+
+env: DJANGO_SETTINGS_MODULE="bet4win_project.settings.travis"
+
+services:
+        - postgresql
+
+addons:
+        postgresql: "9.6"
+
+script:
+  - python manage.py test
